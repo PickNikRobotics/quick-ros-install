@@ -26,8 +26,8 @@ while [ -n "$1" ] ; do
     esac
 done
 
-name_ros_distro=$1
-name_ros_distro=${name_ros_distro:="kinetic"}
+ROS_DISTRO=$1
+ROS_DISTRO=${ROS_DISTRO:="kinetic"}
 
 version=`lsb_release -sc`
 
@@ -85,19 +85,19 @@ sudo apt install -y \
      python-pip \
      python-catkin-lint \
      python-catkin-tools \
-     ros-kinetic-desktop \
+     python-rosinstall \
+     ros-kinetic-desktop-full \
      ros-kinetic-rqt* \
      ros-kinetic-rosemacs
 
-echo "rosdep init and python-rosinstall"
-sudo sh -c "rosdep init"
+# Only init if it has not already been done before
+if [ ! -e /etc/ros/rosdep/sources.list.d/20-default.list ]; then
+  sudo rosdep init
+fi
 rosdep update
-. /opt/ros/$name_ros_distro/setup.sh
-sudo apt-get install -y python-rosinstall
-
 
 # echo "Setting the ROS evironment"
-# sh -c "echo \"source /opt/ros/$name_ros_distro/setup.bash\" >> ~/.bashrc"
+# sh -c "echo \"source /opt/ros/$ROS_DISTRO/setup.bash\" >> ~/.bashrc"
 # sh -c "echo \"source ~/$name_catkinws/devel/setup.bash\" >> ~/.bashrc"
 # sh -c "echo \"export ROS_MASTER_URI=http://localhost:11311\" >> ~/.bashrc"
 # sh -c "echo \"export ROS_HOSTNAME=localhost\" >> ~/.bashrc"
