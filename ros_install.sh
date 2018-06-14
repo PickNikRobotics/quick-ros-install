@@ -30,8 +30,10 @@ ROS_DISTRO=$1
 ROS_DISTRO=${ROS_DISTRO:="kinetic"}
 
 version=`lsb_release -sc`
-
-echo "Checking the ubuntu version"
+echo ""
+echo "INSTALL ROS ---------------------------------"
+echo ""
+echo "Checking the Ubuntu version"
 case $version in
   "saucy" | "trusty" | "vivid" | "wily" | "xenial")
   ;;
