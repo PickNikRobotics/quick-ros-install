@@ -4,7 +4,7 @@ Instant install script for ROS on various versions of Ubuntu Linux
 
 ## Install ROS on Ubuntu
 
-    wget https://raw.githubusercontent.com/PickNikRobotics/quick-ros-install/master/ros_install.sh && chmod 755 ./ros_install.sh && ./ros_install.sh kinetic
+    wget https://raw.githubusercontent.com/PickNikRobotics/quick-ros-install/master/ros_install.sh && chmod 755 ros_install.sh && ./ros_install.sh kinetic
 
 
 Note: you may need these basic dependencies if, for example, you are running in a Docker container:
@@ -39,5 +39,5 @@ We'll use the same approach provided by the ROS MoveIt! project for providing GP
 ### Test Docker
 
     apt-get update
-    apt-get install ros-kinetic-rviz
+    apt-get install ros-kinetic-rviz -y
     rosrun rviz rviz
