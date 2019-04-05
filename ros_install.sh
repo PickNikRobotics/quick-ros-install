@@ -8,7 +8,7 @@
 
 function usage {
     # Print out usage of this script.
-    echo >&2 "usage: $0 [ROS distro (default: kinetic)"
+    echo >&2 "usage: $0 [ROS distro (default: melodic)"
     echo >&2 "          [-h|--help] Print help message."
     exit 0
 }
@@ -28,18 +28,18 @@ while [ -n "$1" ] ; do
 done
 
 ROS_DISTRO=$1
-ROS_DISTRO=${ROS_DISTRO:="kinetic"}
+ROS_DISTRO=${ROS_DISTRO:="melodic"}
 
 version=`lsb_release -sc`
 echo ""
-echo "INSTALL ROS ---------------------------------"
+echo "INSTALLING ROS USING quick_ros_install --------------------------------"
 echo ""
 echo "Checking the Ubuntu version"
 case $version in
-  "saucy" | "trusty" | "vivid" | "wily" | "xenial")
+  "saucy" | "trusty" | "vivid" | "wily" | "xenial" | "bionic")
   ;;
   *)
-    echo "ERROR: This script will only work on Ubuntu Saucy(13.10) / Trusty(14.04) / Vivid / Wily / Xenial. Exit."
+    echo "ERROR: This script will only work on Ubuntu Saucy(13.10) / Trusty(14.04) / Vivid / Wily / Xenial / Bionic. Exit."
     exit 0
 esac
 
@@ -52,10 +52,6 @@ then
 else
   echo "Your ubuntu version is $relesenum"
 fi
-
-# echo "Installing chrony and setting the ntpdate"
-# sudo apt-get install -y chrony
-# sudo ntpdate ntp.ubuntu.com
 
 echo "Add the ROS repository"
 if [ ! -e /etc/apt/sources.list.d/ros-latest.list ]; then
@@ -85,9 +81,7 @@ sudo apt install -y \
      python-catkin-lint \
      python-catkin-tools \
      python-rosinstall \
-     ros-kinetic-desktop-full \
-     ros-kinetic-rqt*
-     #ros-kinetic-rosemacs
+     ros-$ROS_DISTRO-desktop
 
 # Only init if it has not already been done before
 if [ ! -e /etc/ros/rosdep/sources.list.d/20-default.list ]; then
