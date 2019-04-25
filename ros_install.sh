@@ -65,7 +65,7 @@ if [ -z "$roskey" ]; then
   sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
 fi
 
-echo "Update & upgrade the package"
+echo "Updating & upgrading all packages"
 sudo apt-get update
 sudo apt-get dist-upgrade -y
 
@@ -89,8 +89,6 @@ if [ ! -e /etc/ros/rosdep/sources.list.d/20-default.list ]; then
 fi
 rosdep update
 
-echo "Done"
-
-exec bash
+echo "Done installing ROS"
 
 exit 0
