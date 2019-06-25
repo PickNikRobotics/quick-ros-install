@@ -62,7 +62,7 @@ echo "Download the ROS keys"
 roskey=`apt-key list | grep "ROS Builder"` && true # make sure it returns true
 if [ -z "$roskey" ]; then
   echo "No ROS key, adding"
-  sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
+  sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 fi
 
 echo "Updating & upgrading all packages"
