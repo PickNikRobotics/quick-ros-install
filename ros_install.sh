@@ -36,10 +36,10 @@ echo "INSTALLING ROS USING quick_ros_install --------------------------------"
 echo ""
 echo "Checking the Ubuntu version"
 case $version in
-  "saucy" | "trusty" | "vivid" | "wily" | "xenial" | "bionic")
+  "saucy" | "trusty" | "vivid" | "wily" | "xenial" | "bionic" | "focal")
   ;;
   *)
-    echo "ERROR: This script will only work on Ubuntu Saucy(13.10) / Trusty(14.04) / Vivid / Wily / Xenial / Bionic. Exit."
+    echo "ERROR: This script will only work on Ubuntu Saucy(13.10) / Trusty(14.04) / Vivid / Wily / Xenial / Bionic / Focal. Exit."
     exit 0
 esac
 
@@ -70,18 +70,36 @@ sudo apt-get update
 sudo apt-get dist-upgrade -y
 
 echo "Installing ROS"
-sudo apt install -y \
-     liburdfdom-tools \
-     python-rosdep \
-     python-rosinstall \
-     python-bloom \
-     python-rosclean \
-     python-wstool \
-     python-pip \
-     python-catkin-lint \
-     python-catkin-tools \
-     python-rosinstall \
-     ros-$ROS_DISTRO-desktop
+
+# Support for Python 3 in Noetic
+if [ "$ROS_DISTRO" = "noetic" ]
+then
+   sudo apt install -y \
+	liburdfdom-tools \
+	python3-rosdep \
+	python3-rosinstall \
+	python3-bloom \
+	python3-rosclean \
+	python3-wstool \
+	python3-pip \
+	python3-catkin-lint \
+	python3-catkin-tools \
+	python3-rosinstall \
+	ros-$ROS_DISTRO-desktop
+else
+   sudo apt install -y \
+	liburdfdom-tools \
+	python-rosdep \
+	python-rosinstall \
+	python-bloom \
+	python-rosclean \
+	python-wstool \
+	python-pip \
+	python-catkin-lint \
+	python-catkin-tools \
+	python-rosinstall \
+	ros-$ROS_DISTRO-desktop
+fi
 
 # Only init if it has not already been done before
 if [ ! -e /etc/ros/rosdep/sources.list.d/20-default.list ]; then
